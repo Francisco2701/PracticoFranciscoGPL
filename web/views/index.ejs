@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p> Welcome to <%= title %></p>
-  </body>
+<html lang="es">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <header>
+    <%- include('partials/header') %>
+  </header>
+    <main>
+        <h2>Últimas entradas del blog</h2>
+        <div class="blog-grid">
+                <div class="blog-item">
+                  <img src="/images/" alt="">
+                  <h3>Titulo</h3>
+                </div>
+                
+        </div>
+    </main>
+
+    <footer>
+      <%- include('partials/footer') %>
+    </footer>
+    
+</body>
 </html>

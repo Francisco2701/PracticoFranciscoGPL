@@ -1,39 +1,29 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const app = express();
+const PORT = 3000;
 
-var indexRouter = require('./routes/index');
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// Configurar EJS como motor de plantillas y servir archivos estáticos
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// Datos de ejemplo para las entradas del blog
+const blogPosts = [
+  { title: "Los Clásicos de Mayor Venta", image: "image1.jpg", description: "Breve descripción de la entrada 1" },
+  { title: "Juegos Retro Inolvidables", image: "image2.jpg", description: "Breve descripción de la entrada 2" },
+  { title: "Las Máquinas Arcade", image: "image3.jpg", description: "Breve descripción de la entrada 3" },
+  { title: "Emuladores de Consolas Retro", image: "image4.jpg", description: "Breve descripción de la entrada 4" },
+  { title: "Historia de los Videojuegos", image: "image5.jpg", description: "Breve descripción de la entrada 5" },
+  { title: "Las Mejores Sagas de los 90", image: "image6.jpg", description: "Breve descripción de la entrada 6" },
+  { title: "Consolas Portátiles Retro", image: "image7.jpg", description: "Breve descripción de la entrada 7" },
+  { title: "Cómo Crear Tu Consola Retro", image: "image8.jpg", description: "Breve descripción de la entrada 8" }
+];
 
-app.use('/', indexRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+// Ruta para la página principal
+app.get('/', (req, res) => {
+  res.render('index', { blogPosts });
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+// Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
-
-module.exports = app;
